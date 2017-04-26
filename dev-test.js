@@ -54,10 +54,17 @@ sequelize.sync({ force: true }).then(function () {
 
     )
         .then(() => {
-            sequelize.query("SELECT * FROM dbo.[user] where first_name = $firstName OR last_name = $lastName", {
+            sequelize.query("SELECT * FROM dbo.[user] where first_name = $1 OR last_name = $2", {
+                bind: [
+                    "Karthik",
+                    "Tzaprev"
+                ]
+            }).then(x => console.log(x));
+
+             sequelize.query("SELECT * FROM dbo.[user] where first_name = $firstName OR last_name = $lastName", {
                 bind: {
-                    firstName: "Karthik",
-                    lastName: "Tzaprev"
+                    firstName: "bob",
+                    lastName: "zhang"
                 }
             }).then(x => console.log(x));
         });
